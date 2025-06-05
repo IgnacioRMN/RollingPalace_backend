@@ -1,0 +1,34 @@
+{
+  "name": "rollingpalace-backend",
+  "version": "0.0.1",
+  "description": "repositorio backend para RollingPalace hotel",
+  "keywords": [
+    "server",
+    "backend",
+    "mongo",
+    "mongoose",
+    "express"
+  ],
+  "homepage": "https://github.com/IgnacioRMN/RollingPalace_backend#readme",
+  "bugs": {
+    "url": "https://github.com/IgnacioRMN/RollingPalace_backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IgnacioRMN/RollingPalace_backend.git"
+  },
+  "license": "ISC",
+  "author": "Grupo II - Comisión Web7 - Rollingcode School",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.15.1"
+  }
+}
