@@ -93,9 +93,9 @@ El backend estará disponible en `http://localhost:4000` (o el puerto que config
 
 - [José Ignacio Ramón](https://github.com/ignacio) – Tech Lead
 - [Tomás Pando](https://github.com/tomas) – Scrum Master
-- [Juan Andres Monserrat](https://github.com/monserrat) – Backend Developer
-- [Eric Ezequiel Mercado](https://github.com/eric) – Backend Developer
-- [Juan Andres Stegmayer](https://github.com/stegmayer) – Backend Developer
+- [Juan Andres Monserrat](https://github.com/monserrat) – Developer
+- [Eric Ezequiel Mercado](https://github.com/eric) – Developer
+- [Juan Andres Stegmayer](https://github.com/stegmayer) – Developer
 
 ---
 
