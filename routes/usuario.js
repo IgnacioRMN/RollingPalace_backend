@@ -1,18 +1,14 @@
 import express from "express";
-import {
-  obtenerUsuarios,
-  actualizarUsuario,
-  eliminarUsuario,
-} from "../controllers/usuario.js";
-import { proteger, esAdmin } from "../middlewares/auth.js";
+import { getUsers, updateUser, deleteUser } from "../controllers/usuario.js";
+import { proteger, isAdmin } from "../middlewares/auth.js";
 
 const router = express.Router();
 
-router.route("/").get(proteger, esAdmin, obtenerUsuarios);
+router.route("/").get(proteger, isAdmin, getUsers);
 
 router
   .route("/:id")
-  .put(proteger, esAdmin, actualizarUsuario)
-  .delete(proteger, esAdmin, eliminarUsuario);
+  .put(proteger, isAdmin, updateUser)
+  .delete(proteger, isAdmin, deleteUser);
 
 export default router;

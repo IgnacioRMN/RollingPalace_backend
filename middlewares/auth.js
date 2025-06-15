@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/usuario.js";
 
 // proteger rutas y verificar token
-export const protect = async (req, res, next) => {
+export const proteger = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (authHeader?.startsWith("Bearer")) {
@@ -10,7 +10,7 @@ export const protect = async (req, res, next) => {
 
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = await User.findById(decoded.id).select("-contraseña");
+      req.user = await User.findById(decoded.id).select("-password");
       return next();
     } catch {
       return res.status(401).json({ message: "token invalido" });
