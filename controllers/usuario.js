@@ -1,8 +1,5 @@
 import User from "../models/usuario.js";
 
-// @desc    Get all users
-// @route   GET /api/users
-// @access  Private/Admin
 export const getUsers = async (req, res) => {
   try {
     const users = await User.find().select("-password");
@@ -12,9 +9,6 @@ export const getUsers = async (req, res) => {
   }
 };
 
-// @desc    Update user
-// @route   PUT /api/users/:id
-// @access  Private/Admin
 export const updateUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -39,9 +33,6 @@ export const updateUser = async (req, res) => {
   }
 };
 
-// @desc    Delete user
-// @route   DELETE /api/users/:id
-// @access  Private/Admin
 export const deleteUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
