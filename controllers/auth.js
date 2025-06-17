@@ -11,14 +11,11 @@ export const registrarUsuario = async (req, res) => {
     if (usuarioExiste) {
       return res.status(400).json({ message: "Usuario ya registrado" });
     }
-    const conteoUsuarios = await Usuario.countDocuments();
-    const estadoAdmin = conteoUsuarios === 0 ? true : esAdmin || false;
 
     const usuario = new Usuario({
       nombre,
       email,
       contraseña: bcrypt.hashSync(contraseña, 10),
-      esAdmin: estadoAdmin,
     });
 
     const usuarioCreado = await usuario.save();
