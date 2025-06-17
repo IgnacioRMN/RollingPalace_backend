@@ -1,24 +1,31 @@
 import mongoose from "mongoose";
 
-const HabitacionSchema = new mongoose.Schema({
-  tipo: {
-    type: String,
-    required: true,
-    enum: ["individual", "doble", "suite"],
+const HabitacionSchema = new mongoose.Schema(
+  {
+    roomNumber: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    roomType: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    description: String,
+    image: String,
+    available: {
+      type: Boolean,
+      default: true,
+    },
   },
-  precio: {
-    type: Number,
-    required: true,
-  },
-  disponible: {
-    type: Boolean,
-    default: true,
-  },
-  descripcion: {
-    type: String,
-    trim: true,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const Habitacion = mongoose.model("Habitacion", HabitacionSchema);
 

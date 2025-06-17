@@ -1,14 +1,14 @@
 import express from "express";
 import { getUsers, updateUser, deleteUser } from "../controllers/usuario.js";
-import { proteger, isAdmin } from "../middlewares/auth.js";
+import { proteger, admin } from "../middlewares/auth.js";
 
 const router = express.Router();
 
-router.route("/").get(proteger, isAdmin, getUsers);
+router.route("/").get(proteger, admin, getUsers);
 
 router
   .route("/:id")
-  .put(proteger, isAdmin, updateUser)
-  .delete(proteger, isAdmin, deleteUser);
+  .put(proteger, admin, updateUser)
+  .delete(proteger, admin, deleteUser);
 
 export default router;

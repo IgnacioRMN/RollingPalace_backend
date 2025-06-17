@@ -13,6 +13,7 @@ router.post(
       "password",
       "La contraseña debe tener al menos 6 caracteres"
     ).isLength({ min: 6 }),
+    check("isAdmin", "El rol debe ser booleano").optional().isBoolean(),
   ],
   registerUser
 );

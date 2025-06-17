@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
 export const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, isAdmin } = req.body;
 
   try {
     // Verificar si usuario ya existe
@@ -11,12 +11,15 @@ export const registerUser = async (req, res) => {
     if (userExists) {
       return res.status(400).json({ message: "Usuario ya registrado" });
     }
+    const userCount = await User.countDocuments();
+    const adminStatus = userCount === 0 ? true : isAdmin || false;
 
     // Crear nuevo usuario
     const user = new User({
       name,
       email,
       password: bcrypt.hashSync(password, 10),
+      isAdmin: adminStatus,
     });
 
     const createdUser = await user.save();
