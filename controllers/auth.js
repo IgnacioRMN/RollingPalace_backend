@@ -1,54 +1,54 @@
-import User from "../models/usuario.js";
+import Usuario from "../models/usuario.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-export const registerUser = async (req, res) => {
-  const { name, email, password, isAdmin } = req.body;
+export const registrarUsuario = async (req, res) => {
+  const { nombre, email, contraseña, esAdmin } = req.body;
 
   try {
     // Verificar si usuario ya existe
-    const userExists = await User.findOne({ email });
-    if (userExists) {
+    const usuarioExiste = await Usuario.findOne({ email });
+    if (usuarioExiste) {
       return res.status(400).json({ message: "Usuario ya registrado" });
     }
-    const userCount = await User.countDocuments();
-    const adminStatus = userCount === 0 ? true : isAdmin || false;
+    const conteoUsuarios = await Usuario.countDocuments();
+    const estadoAdmin = conteoUsuarios === 0 ? true : esAdmin || false;
 
-    // Crear nuevo usuario
-    const user = new User({
-      name,
+    const usuario = new Usuario({
+      nombre,
       email,
-      password: bcrypt.hashSync(password, 10),
-      isAdmin: adminStatus,
+      contraseña: bcrypt.hashSync(contraseña, 10),
+      esAdmin: estadoAdmin,
     });
 
-    const createdUser = await user.save();
+    const usuarioCreado = await usuario.save();
 
     res.status(201).json({
-      _id: createdUser._id,
-      name: createdUser.name,
-      email: createdUser.email,
-      token: generateToken(createdUser._id),
+      _id: usuarioCreado._id,
+      name: usuarioCreado.nombre,
+      email: usuarioCreado.email,
+      esAdmin: usuarioCreado.esAdmin,
+      token: generarToken(usuarioCreado._id),
     });
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" });
   }
 };
 
-export const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+export const loginUsuario = async (req, res) => {
+  const { email, contraseña } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const usuario = await Usuario.findOne({ email });
 
     // Verificar usuario y contraseña
-    if (user && bcrypt.compareSync(password, user.password)) {
+    if (usuario && bcrypt.compareSync(contraseña, usuario.contraseña)) {
       res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        token: generateToken(user._id),
+        _id: usuario._id,
+        name: usuario.nombre,
+        email: usuario.email,
+        isAdmin: usuario.esAdmin,
+        token: generarToken(usuario._id),
       });
     } else {
       res.status(401).json({ message: "Credenciales inválidas" });
@@ -59,7 +59,7 @@ export const loginUser = async (req, res) => {
 };
 
 // Generar JWT
-const generateToken = (id) => {
+const generarToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });

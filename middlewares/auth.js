@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../models/usuario.js";
+import Usuario from "../models/usuario.js";
 
 // proteger rutas y verificar token
 export const proteger = async (req, res, next) => {
@@ -10,7 +10,7 @@ export const proteger = async (req, res, next) => {
 
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = await User.findById(decoded.id).select("-password");
+      req.usuario = await Usuario.findById(decoded.id).select("-contraseña");
       return next();
     } catch {
       return res.status(401).json({ message: "token invalido" });
@@ -21,8 +21,8 @@ export const proteger = async (req, res, next) => {
 };
 
 // Verificar si un usuario es administrador
-export const admin = (req, res, next) => {
-  return req.user?.isAdmin
+export const esAdmin = (req, res, next) => {
+  return req.usuario?.esAdmin
     ? next()
     : res.status(403).json({ message: "Acceso no autorizado" });
 };

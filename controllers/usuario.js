@@ -1,45 +1,45 @@
-import User from "../models/usuario.js";
+import Usuario from "../models/usuario.js";
 
-export const getUsers = async (req, res) => {
+export const obtenerUsuarios = async (req, res) => {
   try {
-    const users = await User.find().select("-password");
-    res.json(users);
+    const usuarios = await Usuario.find().select("-contraseña");
+    res.json(usuarios);
   } catch {
     res.status(500).json({ message: "Error al obtener usuarios" });
   }
 };
 
-export const updateUser = async (req, res) => {
+export const actualizarUsuario = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user)
+    const usuario = await Usuario.findById(req.params.id);
+    if (!usuario)
       return res.status(404).json({ message: "Usuario no encontrado" });
 
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
-    user.isAdmin =
-      req.body.isAdmin !== undefined ? req.body.isAdmin : user.isAdmin;
+    usuario.nombre = req.body.nombre || usuario.nombre;
+    usuario.email = req.body.email || usuario.email;
+    usuario.esAdmin =
+      req.body.esAdmin !== undefined ? req.body.esAdmin : usuario.esAdmin;
 
-    const updatedUser = await user.save();
+    const usuarioActualizado = await usuario.save();
 
     res.json({
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      isAdmin: updatedUser.isAdmin,
+      _id: usuarioActualizado._id,
+      name: usuarioActualizado.nombre,
+      email: usuarioActualizado.email,
+      isAdmin: usuarioActualizado.esAdmin,
     });
   } catch {
     res.status(500).json({ message: "Error al actualizar datos del usuario" });
   }
 };
 
-export const deleteUser = async (req, res) => {
+export const elminarUsuario = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user)
+    const usuario = await Usuario.findById(req.params.id);
+    if (!usuario)
       return res.status(404).json({ message: "Usuario no encontrado" });
 
-    await user.deleteOne();
+    await usuario.deleteOne();
     res.json({ message: "Usuario eliminado" });
   } catch {
     res.status(500).json({ message: "Error al eliminar usuario" });

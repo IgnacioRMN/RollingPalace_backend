@@ -2,22 +2,22 @@ import mongoose from "mongoose";
 
 const HabitacionSchema = new mongoose.Schema(
   {
-    roomNumber: {
+    numeroHabitacion: {
       type: String,
       required: true,
       unique: true,
     },
-    roomType: {
+    tipoHabitacion: {
       type: String,
       required: true,
     },
-    price: {
+    precio: {
       type: Number,
       required: true,
     },
-    description: String,
-    image: String,
-    available: {
+    descripcion: String,
+    imagen: String,
+    disponible: {
       type: Boolean,
       default: true,
     },
