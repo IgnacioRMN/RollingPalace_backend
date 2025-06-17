@@ -11,14 +11,12 @@ Este backend gestiona las funcionalidades del sistema de reservas del hotel, inc
 ```bash
 rollingpalace-backend/
 ├── src/
-│   ├── config/              # Configuraciones generales (DB, env, etc.)
-│   ├── controllers/         # Lógica de negocio para rutas (habitaciones, usuarios, etc.)
-│   ├── middlewares/         # Middlewares como validaciones y autenticación JWT
-│   ├── models/              # Modelos de datos con Mongoose
-│   ├── routes/              # Rutas de la API
-│   ├── utils/               # Funciones utilitarias (encriptación, validaciones, etc.)
-│   ├── index.js             # Punto de entrada del servidor
-│   └── .env                 # Variables de entorno (no versionado)
+│   ├── controllers/         # Lógica de usuarios, habitaciones y autenticación.
+│   ├── database/            # Configuración de la base de datos.
+│   ├── middlewares/         # Autenticación y manejo de errores.
+│   ├── models/              # Modelos de datos con Mongoose.
+│   ├── routes/              # Rutas de la API.
+│   └── index.js             # Punto de entrada del servidor
 ├── .gitignore
 ├── package.json
 └── README.md
@@ -50,7 +48,7 @@ git clone https://github.com/IgnacioRMN/RollingPalace_backend.git
 2. Accedé al directorio del proyecto:
 
 ```bash
-cd rollingpalace-backend
+cd RollingPalace_backend
 ```
 
 3. Instalá las dependencias:
@@ -62,9 +60,9 @@ npm install
 4. Configurá tus variables de entorno en un archivo `.env`:
 
 ```env
-PORT=
-MONGO_URI=
+MONGODB_CNN=
 JWT_SECRET=
+PORT=
 ```
 
 5. Ejecutá el servidor:
@@ -73,7 +71,7 @@ JWT_SECRET=
 npm run dev
 ```
 
-El backend estará disponible en `http://localhost:4000` (o el puerto que configures).
+El backend estará disponible en `http://localhost:5000` (o el puerto que configures).
 
 ---
 
