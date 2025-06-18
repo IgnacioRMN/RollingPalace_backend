@@ -2,6 +2,7 @@ import express from "express";
 import {
   crearHabitacion,
   obtenerHabitaciones,
+  obtenerHabitacionPorId,
   editarHabitacion,
   eliminarHabitacion,
 } from "../controllers/habitacion.js";
@@ -16,6 +17,7 @@ router
 
 router
   .route("/:id")
+  .get(obtenerHabitacionPorId)
   .put(proteger, esAdmin, editarHabitacion)
   .delete(proteger, esAdmin, eliminarHabitacion);
 

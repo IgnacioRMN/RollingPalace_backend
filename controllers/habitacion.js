@@ -29,6 +29,22 @@ export const obtenerHabitaciones = async (req, res) => {
   }
 };
 
+export const obtenerHabitacionPorId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const habitacion = await Habitacion.findById(id);
+
+    if (!habitacion) {
+      return res.status(404).json({ message: "Habitación no encontrada" });
+    }
+
+    res.json(habitacion);
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener la habitación" });
+  }
+};
+
+
 export const editarHabitacion = async (req, res) => {
   try {
     const {
