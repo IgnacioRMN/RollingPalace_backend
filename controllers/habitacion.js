@@ -44,7 +44,6 @@ export const obtenerHabitacionPorId = async (req, res) => {
   }
 };
 
-
 export const editarHabitacion = async (req, res) => {
   try {
     const {
@@ -68,7 +67,7 @@ export const editarHabitacion = async (req, res) => {
       habitacion.disponible =
         disponible !== undefined ? disponible : habitacion.disponible;
 
-      const habitacionEditada = await room.save();
+      const habitacionEditada = await habitacion.save();
       res.json(habitacionEditada);
     } else {
       res.status(404).json({ message: "Habitación no encontrada" });

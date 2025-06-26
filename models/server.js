@@ -6,6 +6,7 @@ import { notFound, errorHandler } from "../middlewares/manejoErrores.js";
 import authRoutes from "../routes/auth.js";
 import habitacionesRoutes from "../routes/habitacion.js";
 import usuariosRoutes from "../routes/usuario.js";
+import reservasRoutes from "../routes/reservas.js";
 
 dotenv.config();
 dbConnection();
@@ -29,6 +30,7 @@ export default class Server {
     this.app.use("/api/auth", authRoutes);
     this.app.use("/api/habitaciones", habitacionesRoutes);
     this.app.use("/api/usuarios", usuariosRoutes);
+    this.app.use("/api/reservas", reservasRoutes);
   }
 
   errorHandlers() {

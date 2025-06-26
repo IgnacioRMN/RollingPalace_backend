@@ -1,26 +1,24 @@
 import mongoose from "mongoose";
 
-const reservaSchema = new mongoose.Schema(
-  {
-    usuario: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Usuario",
-      required: true,
-    },
-    habitacion: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Habitacion",
-      required: true,
-    },
-    fechaEntrada: Date,
-    fechaSalida: Date,
-    precioTotal: Number,
+const ReservaSchema = new mongoose.Schema({
+  usuario: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Usuario",
+    required: true,
   },
-  {
-    timestamps: true,
-  }
-);
+  habitacion: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Habitacion",
+    required: true,
+  },
+  fechaInicio: { type: Date, required: true },
+  fechaFin: { type: Date, required: true },
+  estado: {
+    type: String,
+    enum: ["Pendiente", "Confirmada", "Cancelada"],
+    default: "Pendiente",
+  },
+  fechaCreacion: { type: Date, default: Date.now },
+});
 
-const Reserva = mongoose.model("Reserva", reservaSchema);
-
-export default Reserva;
+export default mongoose.model("Reserva", ReservaSchema);
