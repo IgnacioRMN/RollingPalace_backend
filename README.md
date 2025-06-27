@@ -75,6 +75,64 @@ El backend estará disponible en `http://localhost:5000` (o el puerto que config
 
 ---
 
+# Documentación de la API – RollingPalace Backend
+
+## Tabla de Endpoints
+
+| Recurso      | Método | Ruta                         | Descripción                              | Autenticación |
+| ------------ | ------ | ---------------------------- | ---------------------------------------- | ------------- |
+| Usuarios     | GET    | `/api/usuarios`              | Obtener todos los usuarios               | Admin         |
+| Usuarios     | PUT    | `/api/usuarios/:id`          | Actualizar usuario por ID                | Admin         |
+| Usuarios     | DELETE | `/api/usuarios/:id`          | Eliminar usuario por ID                  | Admin         |
+| Auth         | POST   | `/api/auth/register`         | Registrar nuevo usuario                  | No            |
+| Auth         | POST   | `/api/auth/login`            | Login de usuario                         | No            |
+| Habitaciones | POST   | `/api/habitacion`            | Crear habitación                         | Admin         |
+| Habitaciones | GET    | `/api/habitacion`            | Listar habitaciones                      | No            |
+| Habitaciones | GET    | `/api/habitacion/:id`        | Obtener habitación por ID                | No            |
+| Habitaciones | PUT    | `/api/habitacion/:id`        | Editar habitación por ID                 | Admin         |
+| Habitaciones | DELETE | `/api/habitacion/:id`        | Eliminar habitación por ID               | Admin         |
+| Reservas     | POST   | `/api/reservas`              | Crear reserva                            | Usuario       |
+| Reservas     | GET    | `/api/reservas/mis-reservas` | Obtener reservas del usuario autenticado | Usuario       |
+| Reservas     | GET    | `/api/reservas`              | Obtener todas las reservas               | Admin         |
+| Reservas     | GET    | `/api/reservas/:id`          | Obtener reserva por ID                   | Usuario/Admin |
+| Reservas     | PUT    | `/api/reservas/:id`          | Actualizar estado de reserva             | Admin         |
+| Reservas     | DELETE | `/api/reservas/:id`          | Eliminar reserva por ID                  | Admin         |
+
+## Descripción General
+
+Esta API permite gestionar usuarios, habitaciones y reservas para el sistema RollingPalace. Incluye autenticación JWT y control de roles (usuario/admin).
+
+### Autenticación
+
+- Algunas rutas requieren autenticación mediante token JWT.
+- Las rutas marcadas como "Admin" requieren que el usuario tenga rol de administrador.
+
+### Ejemplo de Login
+
+```json
+POST /api/auth/login
+{
+  "email": "usuario@ejemplo.com",
+  "contraseña": "123456"
+}
+```
+
+### Ejemplo de Respuesta Exitosa
+
+```json
+{
+  "token": "<jwt_token>",
+  "usuario": {
+    "_id": "...",
+    "nombre": "...",
+    "email": "...",
+    "esAdmin": false
+  }
+}
+```
+
+---
+
 ## 📌 Funcionalidades Principales
 
 - Registro e inicio de sesión de usuarios.

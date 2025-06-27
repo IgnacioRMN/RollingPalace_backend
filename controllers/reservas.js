@@ -7,7 +7,7 @@ export const crearReserva = async (req, res) => {
     const { habitacionId, fechaInicio, fechaFin } = req.body;
     const usuarioId = req.usuario._id;
 
-    // Validar disponibilidad (puedes mejorar esta lógica)
+    // Validar disponibilidad
     const reservasExistentes = await Reserva.find({
       habitacion: habitacionId,
       $or: [
@@ -27,6 +27,10 @@ export const crearReserva = async (req, res) => {
       fechaFin,
     });
     await reserva.save();
+
+    // Actualizar disponibilidad
+    await Habitacion.findByIdAndUpdate(habitacionId, { disponible: false });
+
     res.status(201).json(reserva);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -46,7 +50,7 @@ export const obtenerMisReservas = async (req, res) => {
   }
 };
 
-// Obtener todas las reservas (solo admin)
+// Obtener todas las reservas
 export const obtenerTodasReservas = async (req, res) => {
   try {
     const reservas = await Reserva.find()
@@ -58,7 +62,7 @@ export const obtenerTodasReservas = async (req, res) => {
   }
 };
 
-// Actualizar estado de una reserva (solo admin)
+// Actualizar estado de una reserva
 export const actualizarEstadoReserva = async (req, res) => {
   try {
     const { id } = req.params;
@@ -72,7 +76,64 @@ export const actualizarEstadoReserva = async (req, res) => {
     }
     reserva.estado = estado;
     await reserva.save();
+
+    // Lógica para actualizar disponibilidad de la habitación
+    if (estado === "Cancelada") {
+      await Habitacion.findByIdAndUpdate(reserva.habitacion, {
+        disponible: true,
+      });
+    }
+    if (estado === "Confirmada") {
+      await Habitacion.findByIdAndUpdate(reserva.habitacion, {
+        disponible: false,
+      });
+    }
+
     res.json({ message: `Reserva actualizada a ${estado}` });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Obtener una reserva por ID
+export const obtenerReservaPorId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const reserva = await Reserva.findById(id)
+      .populate("usuario", "nombre email")
+      .populate("habitacion");
+    if (!reserva) {
+      return res.status(404).json({ message: "Reserva no encontrada" });
+    }
+    // Permitir solo si es admin
+    if (
+      !req.usuario.isAdmin &&
+      reserva.usuario._id.toString() !== req.usuario._id.toString()
+    ) {
+      return res.status(403).json({ message: "No autorizado" });
+    }
+    res.json(reserva);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Eliminar una reserva
+export const eliminarReserva = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const reserva = await Reserva.findById(id);
+    if (!reserva) {
+      return res.status(404).json({ message: "Reserva no encontrada" });
+    }
+    // Antes de eliminar, si la reserva está confirmada, liberar la habitación
+    if (reserva.estado === "Confirmada") {
+      await Habitacion.findByIdAndUpdate(reserva.habitacion, {
+        disponible: true,
+      });
+    }
+    await reserva.deleteOne();
+    res.json({ message: "Reserva eliminada correctamente" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

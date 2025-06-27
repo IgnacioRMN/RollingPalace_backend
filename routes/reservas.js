@@ -1,17 +1,27 @@
-import { Router } from "express";
+import express from "express";
 import {
   crearReserva,
   obtenerMisReservas,
   obtenerTodasReservas,
   actualizarEstadoReserva,
+  obtenerReservaPorId,
+  eliminarReserva,
 } from "../controllers/reservas.js";
 import { proteger, esAdmin } from "../middlewares/auth.js";
 
-const router = Router();
+const router = express.Router();
 
-router.post("/", proteger, crearReserva);
-router.get("/mis-reservas", proteger, obtenerMisReservas);
-router.get("/", [proteger, esAdmin], obtenerTodasReservas);
-router.put("/:id", [proteger, esAdmin], actualizarEstadoReserva);
+router
+  .route("/")
+  .post(proteger, crearReserva)
+  .get([proteger, esAdmin], obtenerTodasReservas);
+
+router
+  .route("/:id")
+  .get(proteger, obtenerReservaPorId)
+  .put([proteger, esAdmin], actualizarEstadoReserva)
+  .delete([proteger, esAdmin], eliminarReserva);
+
+router.route("/mis-reservas").get(proteger, obtenerMisReservas);
 
 export default router;
