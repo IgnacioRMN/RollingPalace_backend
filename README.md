@@ -1,8 +1,10 @@
-# 🏨 Proyecto Final Backend: Rolling Palace
+# 🏨 Proyecto Final Backend: Rolling Palace Hotel
 
 Bienvenidos al repositorio **backend** de **Rolling Palace**, el proyecto final desarrollado por el **Grupo II** de la **comisión Web7** en el programa de formación **Full Stack Web Developer** de **RollingCode School**.
 
 Este backend gestiona las funcionalidades del sistema de reservas del hotel, incluyendo autenticación de usuarios, gestión de habitaciones, reservas, panel administrativo, y más.
+
+ [Repositorio Frontend de Rolling Palace Hotel](https://github.com/IgnacioRMN/RollingPalace_frontend) 
 
 ---
 
@@ -147,18 +149,18 @@ POST /api/auth/login
 
 ## 👥 Equipo de Desarrollo
 
-- [José Ignacio Ramón](https://github.com/ignacio) – Tech Lead
-- [Tomás Pando](https://github.com/tomas) – Scrum Master
-- [Juan Andres Monserrat](https://github.com/monserrat) – Developer
-- [Eric Ezequiel Mercado](https://github.com/eric) – Developer
-- [Juan Andres Stegmayer](https://github.com/stegmayer) – Developer
+- [José Ignacio Ramón](https://github.com/IgnacioRMN) – Tech Lead & Fullstack Developer.
+- [Tomás Pando](https://github.com/TPtomaspando) – Scrum Master & Fullstack Developer.
+- [Juan Andres Monserrat](https://github.com/petumonse) – Design UI & Frontend Developer.
+- Eric Mercado – Developer. 
+- Juan Andres Stegmayer – Developer.
 
 ---
 
 ## 🎓 Agradecimientos
 
-Agradecemos a los mentores y compañeros de RollingCode School por su acompañamiento y guía constante durante todo el proceso de aprendizaje.  
-Especialmente a **Andrés Perlo**, **Emilse Arias** y **Julio Forni** por los conocimientos transmitidos.
+Agradecemos a los mentores y tutores de RollingCode School por su acompañamiento y guía constante durante todo el proceso de aprendizaje.  
+Especialmente a **Andrés Perlo**, **Francisco Pérez**, **Emilse Arias** y **Julio Forni** por los conocimientos transmitidos.
 
 ---
 
