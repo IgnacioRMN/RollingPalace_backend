@@ -11,6 +11,8 @@ import { proteger, esAdmin } from "../middlewares/auth.js";
 
 const router = express.Router();
 
+router.route("/mis-reservas").get(proteger, obtenerMisReservas);
+
 router
   .route("/")
   .post(proteger, crearReserva)
