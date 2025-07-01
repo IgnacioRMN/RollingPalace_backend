@@ -1,10 +1,18 @@
-# 🏨 Proyecto Final Backend: Rolling Palace Hotel
+# 🏨 Rolling Palace Backend – Proyecto Final
+
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=000)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+
 
 Bienvenidos al repositorio **backend** de **Rolling Palace**, el proyecto final desarrollado por el **Grupo II** de la **comisión Web7** en el programa de formación **Full Stack Web Developer** de **RollingCode School**.
 
 Este backend gestiona las funcionalidades del sistema de reservas del hotel, incluyendo autenticación de usuarios, gestión de habitaciones, reservas, panel administrativo, y más.
 
- [Repositorio Frontend de Rolling Palace Hotel](https://github.com/IgnacioRMN/RollingPalace_frontend) 
+## 🔗 Enlaces Útiles
+
+- 📦 [Repositorio Frontend](https://github.com/IgnacioRMN/RollingPalace_frontend)
 
 ---
 
